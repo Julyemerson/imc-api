@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,7 +10,9 @@ datasource db {
 model User {
   id    Int     @default(autoincrement()) @id
   email String  @unique
-  name  String?
+  name  String
+  height Int
+  weight Int
   createdAt DateTime @default(now())
   imc Imc[]
 
@@ -22,8 +21,7 @@ model User {
 
 model Imc {
   id Int @default(autoincrement()) @id
-  height Int
-  weight Int
+  imc Float
   createdAt DateTime @default(now())
   userId Int
   user User @relation(fields: [userId], references: [id])
