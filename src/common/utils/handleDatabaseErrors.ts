@@ -1,5 +1,5 @@
-import { PrismaClientError } from '../types/PrismaClientError';
-import { UniqueConstraintError } from '../types/UniqueConstraintError';
+import { PrismaClientError } from '../errors/types/PrismaClientError';
+import { UniqueConstraintError } from '../errors/types/UniqueConstraintError';
 
 export const handleDatabaseErrors = (e: PrismaClientError): Error => {
   const PrismaCodeErrors = {

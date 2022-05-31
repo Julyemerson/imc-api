@@ -12,6 +12,11 @@ export class UsersService {
     return user;
   }
 
+  async findMany() {
+    const users = await this.repository.findMany();
+    return users;
+  }
+
   async findOne(id: number) {
     const user = await this.repository.findOne(id);
 
@@ -26,5 +31,10 @@ export class UsersService {
     const updateUser = await this.repository.update(id, updateUserDto);
 
     return updateUser;
+  }
+
+  async getImc(id: number) {
+    const userImc = await this.repository.getImc(id);
+    return userImc;
   }
 }

@@ -7,9 +7,19 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Get()
+  findMany() {
+    return this.usersService.findMany();
+  }
+
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Get('imc/:id')
+  getImc(@Param('id') id: string) {
+    return this.usersService.getImc(+id);
   }
 
   @Get(':id')
