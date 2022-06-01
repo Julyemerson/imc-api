@@ -23,3 +23,12 @@ Após a finalização da instalação das imagens, aplicação estará disponív
 localhost:3000
 
 ```
+
+## Documentação da API
+Para acessar a documentação acesse:
+
+```bash
+# development
+localhost:3000/docs
+
+```
