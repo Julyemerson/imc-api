@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,24 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  name  String
-  createdAt DateTime @default(now())
-  healthData HealthData[]
 
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  name String
+  createdAt DateTime @default(now())
+  health Health[]
   @@map("user")
 }
 
-model HealthData {
-  id Int @default(autoincrement()) @id
-  imc Float
-  height Float
+model Health {
+  id Int @id @default(autoincrement())
   weight Float
+  height Float
+  imc String?
   createdAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
 
-  @@map("healthData")
+  user User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  @@map("health")
 }

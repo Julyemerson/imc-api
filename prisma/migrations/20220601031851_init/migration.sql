@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "health" ALTER COLUMN "imc" SET DATA TYPE TEXT;
