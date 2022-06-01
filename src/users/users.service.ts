@@ -32,4 +32,9 @@ export class UsersService {
 
     return updateUser;
   }
+
+  remove(id) {
+    const removedUser = this.repository.remove(id);
+    return removedUser;
+  }
 }

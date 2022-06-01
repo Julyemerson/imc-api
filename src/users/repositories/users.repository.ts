@@ -32,6 +32,14 @@ export class UsersRepository {
   async findOne(id: number) {
     const user = await this.prisma.user.findUnique({
       where: { id },
+      include: {
+        health: {
+          select: {
+            imc: true,
+            createdAt: true,
+          },
+        },
+      },
     });
 
     if (!user) {
@@ -58,5 +66,23 @@ export class UsersRepository {
     });
 
     return updateUser;
+  }
+
+  async remove(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    return this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

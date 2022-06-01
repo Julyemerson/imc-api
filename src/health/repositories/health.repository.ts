@@ -21,7 +21,7 @@ export class HealthRepository {
     });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('Usuário não encontrado');
     }
 
     const data: Prisma.HealthCreateInput = {
@@ -61,8 +61,18 @@ export class HealthRepository {
     });
   }
 
-  async remove(id: number): Promise<HealthEntity> {
-    return this.prisma.health.delete({
+  async remove(id: number) {
+    const healthData = await this.prisma.health.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!healthData) {
+      throw new NotFoundException('Dados não encontrados');
+    }
+
+    return await this.prisma.health.delete({
       where: {
         id,
       },
