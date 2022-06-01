@@ -17,11 +17,6 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Get('imc/:id')
-  getImc(@Param('id') id: string) {
-    return this.usersService.getImc(+id);
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);

@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { handleImcRate } from 'src/common/utils/handleImcRate';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -17,14 +16,27 @@ export class UsersRepository {
   }
 
   async findMany() {
-    const users = await this.prisma.user.findMany();
+    const users = await this.prisma.user.findMany({
+      include: {
+        health: {
+          select: {
+            imc: true,
+            createdAt: true,
+          },
+        },
+      },
+    });
     return users;
   }
 
   async findOne(id: number) {
-    const user = this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { id },
     });
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
 
     return user;
   }
@@ -44,20 +56,7 @@ export class UsersRepository {
       where: { id },
       data: updateUserDto,
     });
+
     return updateUser;
-  }
-
-  async getImc(id: number) {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id,
-      },
-    });
-
-    if (!user) {
-      throw new NotFoundException('Usuário não encontrado');
-    }
-
-    return user;
   }
 }
