@@ -1,52 +1,25 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-## Description
+![Container](https://unsplash.com/photos/q6j5mSRpi50)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalação
 
-## Installation
+Para Iniciar o projeto você precisa do Docker Instalado na sua máquina.
+
+[docker](https://www.docker.com/products/docker-desktop/)
+
+Após instalado configure a URL de acesso ao bando de dados conforme o arquivo .env.example
+
+abra a pasta do projeto e rode o comando
 
 ```bash
-$ npm install
+$ docker-compose up
 ```
 
-## Running the app
+## Rodando o APP
+
+Após a finalização da instalação das imagens a aplicação estará disponível no endereço
 
 ```bash
 # development
-$ npm run start
+LocalHost:3000
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
