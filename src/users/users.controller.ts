@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,8 +20,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  findMany() {
-    return this.usersService.findMany();
+  findMany(@Query('email') email: string) {
+    return this.usersService.findMany(email);
   }
   @ApiResponse({
     status: HttpStatus.CONFLICT,
@@ -37,6 +38,11 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Get()
+  findOneByEmail(@Query() query: string) {
+    return `This Action return a query email ${query} `;
+  }
+
   @ApiResponse({
     status: HttpStatus.CONFLICT,
     description: 'Conflito de email',
@@ -45,6 +51,7 @@ export class UsersController {
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
+
   @ApiNotFoundResponse({ description: 'Não encontrado' })
   @Delete(':id')
   remove(@Param('id') id: string) {

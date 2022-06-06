@@ -5,7 +5,7 @@ services:
     entrypoint: .docker/entrypoint.sh
     container_name: imcapi-app
     ports:
-      - '3000:3000'
+      - '3010:3010'
       - '5555:5555'
     volumes:
       - .:/home/node/app
@@ -24,4 +24,3 @@ services:
     environment:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=imcapi
-

@@ -12,8 +12,8 @@ export class UsersService {
     return user;
   }
 
-  findMany() {
-    const users = this.repository.findMany();
+  findMany(email?: string) {
+    const users = this.repository.findMany(email);
     return users;
   }
 

@@ -15,7 +15,23 @@ export class UsersRepository {
     return user;
   }
 
-  async findMany() {
+  async findMany(email?: string) {
+    if (email) {
+      const user = await this.prisma.user.findUnique({
+        where: {
+          email,
+        },
+        include: {
+          health: {
+            select: {
+              imc: true,
+              createdAt: true,
+            },
+          },
+        },
+      });
+      return user;
+    }
     const users = await this.prisma.user.findMany({
       include: {
         health: {
@@ -35,6 +51,7 @@ export class UsersRepository {
       include: {
         health: {
           select: {
+            id: true,
             imc: true,
             createdAt: true,
           },
